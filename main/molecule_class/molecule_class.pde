@@ -146,17 +146,21 @@ class Molecule{
 
 }
 
-int window_width = 1000;
-int window_height = 1000;
+int window_width = 1025;
+int window_height = 768;
 Molecule m;
 Molecule m2;
 int current_frame = 0;
+
+PImage bk;
+
 void setup(){
   size(window_width, window_height);
-  background(0,0,0);
+  bk = loadImage("../../images/background.png");
+  background(bk);
   //frameRate(1);
-  m = new Molecule((float) 0,(float) 0,"flyer_image.gif");
-  m2 = new Molecule((float) 600, (float) 600, "flyer_image.gif");
+  m = new Molecule((float) 200,(float) 300,"../../images/Water-resized.png");
+  m2 = new Molecule((float) 200, (float) 0, "../../images/HCl-resized.png");
   m.is_colliding(m2);
 
   addMouseWheelListener(new MouseWheelListener() {
@@ -176,7 +180,7 @@ void mouseWheel(int delta) {
 }
 
 void draw(){
-  background(0,0,0);
+  background(bk);
   if (mousePressed){
   //m.go_towards(m2, frameCount);
   // Need to offset set_x and set_y by half of width and height to
