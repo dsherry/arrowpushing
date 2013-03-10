@@ -18,7 +18,7 @@ class Molecule{
   float radius;
   
   Molecule(float x, float y, String filename){
-    float RADIUS_FUDGE = 100;
+    float RADIUS_FUDGE = 10;
     this.x = x;
     this.y = y;
     this.filename = filename;
@@ -139,26 +139,69 @@ class Molecule{
       }
     }
   }
+}
 
+//An arrow that goes from one place to another place 
+//draw arrow from one mouse click to another mouse click.
+//While mouse is held continuously, 
+class Arrow{
+  float start_x;
+  float start_y;
+  float end_x;
+  float end_y;
+  
+  Arrow(float x, float y){
+    this.start_x = x;
+    this.start_y = y;
+    this.end_x = x;
+    this.end_y = y;
+  }
+  
+  void display(){
+    line(this.start_x, this.start_y, this.end_x, this.end_y);
+    pushMatrix();
+    translate(this.end_x, this.end_y);
+    rotate(atan2(this.end_y-this.start_y, this.end_x-this.start_x));
+    triangle(0, 0, -10, 5, -10, -5);
+    popMatrix(); 
+  }
+  
+  void set_end(){
+    this.end_x = mouseX;
+    this.end_y = mouseY;
+  }
+  
+  //TODO write getters and setters if used
   
 }
+
+
 
 int window_width = 1000;
 int window_height = 1000;
 Molecule m; 
 Molecule m2;
 int current_frame = 0;
+Arrow a;
 void setup(){
   size(window_width, window_height);
-  background(0,0,0);
+  background(255,255,255);
   //frameRate(1);
-  m = new Molecule((float) 0,(float) 0,"flyer image.gif");
-  m2 = new Molecule((float) 600, (float) 600, "flyer image.gif");
+  m = new Molecule((float) 0,(float) 0,"h2o_dots.png");
+  m2 = new Molecule((float) 600, (float) 600, "hcl_dots.png");
   m.is_colliding(m2);
+  a = new Arrow((float)100, (float)100);
 }
 
+//void draw(){
+//  background(255,255,255);
+//  a.set_end();
+//  a.display();
+//}
+  
+
 void draw(){
-  background(0,0,0);
+  background(255,255,255);
   if (mousePressed){
   //m.go_towards(m2, frameCount);
   // Need to offset set_x and set_y by half of width and height to
