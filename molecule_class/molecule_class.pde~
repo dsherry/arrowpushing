@@ -192,7 +192,9 @@ void setup(){
   m = new Molecule((float) 0,(float) 0,"h2o_dots.png");
   m2 = new Molecule((float) 600, (float) 600, "hcl_dots.png");
   m.is_colliding(m2);
+<<<<<<< HEAD
   a = new Arrow((float)100, (float)100);
+=======
   
   addMouseWheelListener(new MouseWheelListener() { 
     public void mouseWheelMoved(MouseWheelEvent mwe) { 
@@ -208,6 +210,7 @@ void mouseWheel(int delta) {
   else if(delta == -1){
     m.rotate_molecule(0.2);
   }
+>>>>>>> a295764cd7e632e70b830df4b4d11120fc43c3a8
 }
 
 //void draw(){
