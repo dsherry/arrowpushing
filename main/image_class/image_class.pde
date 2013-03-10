@@ -68,6 +68,12 @@ Image currentImage;
 void draw() {
   background(255);
   currentImage.display();
+    if (index == frames.size() - 1) {
+      println("YOU WON!!!");
+      textSize(32);
+      text("Congratulations!!\nThanks for pushing", 10, 350);
+      fill(111,222,111);
+    }
   if (mousePressed) {
     if (currentImage.satisfied()){
       println("Next frame");
