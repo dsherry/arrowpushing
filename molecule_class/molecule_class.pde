@@ -6,6 +6,8 @@
 //"head towards" another molecule?
 //Move in a specified direction
 
+import java.awt.event.*;
+
 class Molecule{
   // this is the upper left corner of the molecule, which may change
   float x;
@@ -155,6 +157,21 @@ void setup(){
   m = new Molecule((float) 0,(float) 0,"flyer image.gif");
   m2 = new Molecule((float) 600, (float) 600, "flyer image.gif");
   m.is_colliding(m2);
+  
+  addMouseWheelListener(new MouseWheelListener() { 
+    public void mouseWheelMoved(MouseWheelEvent mwe) { 
+      mouseWheel(mwe.getWheelRotation());
+  }}); 
+}
+
+void mouseWheel(int delta) {
+  println("mouse has moved by " + delta + " units."); 
+  if (delta == 1){
+    m.rotate_molecule(-0.2);
+  }
+  else if(delta == -1){
+    m.rotate_molecule(0.2);
+  }
 }
 
 void draw(){
@@ -185,3 +202,4 @@ void keyPressed(){
     m.rotate_molecule(0.2);
   }
 }
+
