@@ -1,6 +1,6 @@
 //create a molecule class
 //needs input image, start location
-//necessary functionality: rotate around own center. rotate around a 
+//necessary functionality: rotate around own center. rotate around a
 //specified point
 //check if this molecule is colliding with another molecule
 //"head towards" another molecule?
@@ -19,7 +19,7 @@ class Molecule{
   PImage img;
   float rotation = 0;
   float radius;
-  
+
   Molecule(float x, float y, String filename){
     float RADIUS_FUDGE = 100;
     this.x = x;
@@ -29,10 +29,10 @@ class Molecule{
     this.molecule_width = img.width;
     this.molecule_height = img.height;
     //calculate radius for collision detection purposes
-    this.radius = sqrt(pow(this.get_width()/2, 2) + 
+    this.radius = sqrt(pow(this.get_width()/2, 2) +
                        pow(this.get_height()/2, 2)) - RADIUS_FUDGE;
   }
-  
+
   void display(){
     //Need to display things in their proper rotation
     pushMatrix();
@@ -42,13 +42,13 @@ class Molecule{
     image(this.img, this.x, this.y);
     popMatrix();
   }
-  
-  
+
+
   void rotate_molecule(float rotation_delta){
     this.rotation += rotation_delta;
     this.rotation = this.rotation%TWO_PI;
   }
-  
+
 //  // rotate around other at distance from center radius
 //  void rotate_around_molecule(Molecule other, float rotation_delta, int radius){
 //    float x_pivot = other.get_center_x();
@@ -59,7 +59,7 @@ class Molecule{
 //    this.display();
 //    popMatrix();
 //  }
-  
+
   boolean is_colliding(Molecule other){
     float dx = this.get_center_x() - other.get_center_x();
     float dy = this.get_center_y() - other.get_center_y();
@@ -71,62 +71,62 @@ class Molecule{
     println("false");
     return false;
   }
-  
+
   float get_radius(){
     return this.radius;
   }
-  
+
   float get_x(){
     return this.x;
   }
-  
+
   float get_y(){
     return this.y;
   }
-  
+
   void set_x(int x){
     this.x = (float) x;
   }
-  
+
   void set_x(float x){
     this.x = x;
   }
-  
+
   void set_y(int y){
     this.y = (float) y;
   }
-  
+
   void set_y(float y){
     this.y = y;
   }
-  
+
   float get_center_x(){
     return this.x + this.molecule_width/2;
   }
-  
+
   float get_center_y(){
     return this.y + this.molecule_height/2;
   }
-  
+
   float get_width(){
     //println(this.molecule_width);
     return this.molecule_width;
   }
-  
+
   float get_height(){
     //println(this.molecule_height);
     return this.molecule_height;
   }
-  
+
   //Use this method if radius is not of appropriate size
   void set_radius(float r){
     this.radius = r;
   }
-  
+
   float rotation(){
     return this.rotation;
   }
-  
+
   //Go one step towards another object and stop once hits
   void go_towards(Molecule other, int current_frame){
     background(0,0,0);
@@ -143,30 +143,30 @@ class Molecule{
     }
   }
 
-  
+
 }
 
 int window_width = 1000;
 int window_height = 1000;
-Molecule m; 
+Molecule m;
 Molecule m2;
 int current_frame = 0;
 void setup(){
   size(window_width, window_height);
   background(0,0,0);
   //frameRate(1);
-  m = new Molecule((float) 0,(float) 0,"flyer image.gif");
-  m2 = new Molecule((float) 600, (float) 600, "flyer image.gif");
+  m = new Molecule((float) 0,(float) 0,"flyer_image.gif");
+  m2 = new Molecule((float) 600, (float) 600, "flyer_image.gif");
   m.is_colliding(m2);
-  
-  addMouseWheelListener(new MouseWheelListener() { 
-    public void mouseWheelMoved(MouseWheelEvent mwe) { 
+
+  addMouseWheelListener(new MouseWheelListener() {
+    public void mouseWheelMoved(MouseWheelEvent mwe) {
       mouseWheel(mwe.getWheelRotation());
-  }}); 
+  }});
 }
 
 void mouseWheel(int delta) {
-  println("mouse has moved by " + delta + " units."); 
+  println("mouse has moved by " + delta + " units.");
   if (delta == 1){
     m.rotate_molecule(-0.2);
   }

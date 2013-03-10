@@ -44,26 +44,50 @@ Image i;
 int index;
 ArrayList frames;
 
+
+
 void setup(){
   //change image location
-  i = new Image("data/flyer_image.gif", 0, 0, 100, 100);
+  frames = new ArrayList();
+  Image firstImage = new Image("../../images/Frame 1 HCl.png", 130, 50, 40, 50);
+  frames.add(firstImage);
+  frames.add(new Image("../../images/Frame 1.5 HCl.png", 300, 20, 100, 60));
+  frames.add(new Image("../../images/Frame 2 HCl.png", 320, 30, 60, 40));
+  frames.add(new Image("../../images/Frame 2.5 HCl.png", 420, 20, 100, 80));
+  frames.add(new Image("../../images/Frame 3 HCl.png", 0, 0, 1000, 1000));
+  frames.add(new Image("../../images/Frame 4 HCl.png", 0, 0, 1000, 1000));
   index = 0;
-  int w = i.get_width();
-  int h = i.get_height();
-  size(w, h);
-  i.display();
-  
-
+  size(700, 500);
+  background(255);
+  firstImage.display();
+  println("setup done");
+  println(frames.size());
+  currentImage = (Image) frames.get(index);
 }
-
-void draw(){
-  i.display();
+Image currentImage;
+void draw() {
+  background(255);
+  currentImage.display();
   if (mousePressed) {
-    if (i.satisfied()){
-      println("A winner is you!");
-      //noLoop();
+    if (currentImage.satisfied()){
+      println("Next frame");
+      println("Advance");
+      index = index + 1;
+      if (index >= frames.size()) {
+        println("YOU WON!!!");
+        index = 0;
+      }
+      println("New index");
+      println(index);
+      currentImage = (Image) frames.get(index);
     }
   }
+  try {
+    Thread.sleep(130);
+  } catch (InterruptedException e) {
+    e.printStackTrace();
+  }
+  
 }
 
 
