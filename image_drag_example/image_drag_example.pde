@@ -37,3 +37,12 @@ void mouseDragged ()
     hcl_y = mouseY;
 }
 
+class Image {
+  int x, y;
+  PImage img;
+  
+  Image(path) {
+    img = loadImage("../images/hcl_dots.png")
+  }
+
+}
